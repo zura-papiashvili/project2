@@ -1,0 +1,29 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.12.6 # You can specify the runtime versions, for example, Python
+    commands:
+      - echo Installing dependencies...
+      - pip install -r requirements.txt # Install Python dependencies
+
+  pre_build:
+    commands:
+      - echo Preparing for build...
+
+  build:
+    commands:
+      - echo Building the project...
+      - python manage.py collectstatic --noinput # Example for Django static files
+      - python manage.py migrate # Apply migrations
+
+  post_build:
+    commands:
+      - echo Build completed successfully!
+
+artifacts:
+  files:
+    - "**/*" # Specify which files should be archived as build artifacts (e.g., the entire project)
+    - "build/**/*" # If your build outputs files in a specific folder
+  discard-paths: yes # This will discard the directory structure, leaving only the files
