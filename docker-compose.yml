@@ -1,0 +1,16 @@
+# docker-compose.yml (Project 1)
+
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: project2
+    restart: always
+    env_file: .env  # Optional: You can define environment variables here
+    ports:
+      - "8002:8000"  # Map container port 8000 to host port 8001
+    volumes:
+      - .:/app  # Optional: mount the current directory to container for live changes
+
+# No db service here since it's external
